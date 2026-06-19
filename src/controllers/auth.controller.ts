@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AuthService } from "../services/auth.service";
-import { registerSchema } from "../validators/auth.validator";
+import { loginSchema, registerSchema } from "../validators/auth.validator";
 
 const authService = new AuthService();
 
@@ -11,5 +11,13 @@ export class AuthController {
         res.status(201).json({
             message: 'User registered successfully'
         });
+    }
+
+    async login(req: Request, res: Response) {
+        const body = loginSchema.parse(req.body);
+        
+        const result = await authService.login(body.email, body.password);
+
+        res.status(200).json(result)
     }
 }

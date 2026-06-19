@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 
 import authRoutes from './routes/auth.routes';
+import { authMiddleware } from './middlewares/auth.middleware';
 
 const app = express();
 
